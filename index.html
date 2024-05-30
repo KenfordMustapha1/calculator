@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            background-color: #4d4d4d;
+        }
+        table {
+            background-color: black;
+            width: 400px;
+            margin-top: 150px;
+            border-radius: 40px;
+        }
+        .calculator input[type="text"] {
+            width: 350px;
+            height: 100px;
+            margin-top: 20px;
+            margin-left: 21px;
+            background-color: black;
+            border-style: hidden;
+            font-size: 50px;
+            text-align: right;
+            color: white;
+        }
+        .calculator input[type="button"] {
+            width: 70px;
+            height: 70px;
+            margin-left: 15px;
+            margin-bottom: 20px;
+            border-radius: 100px;
+            border-style: hidden;
+            font-size: 25px;
+            background-color: #4d4d4d;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <table align="center">
+            <tr>
+                <td colspan="4"><input type="text" id="display" disabled></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="AC" onclick="clearDisplay()" style="background-color: #bdc1c6; color: black;"></td>
+                <td><input type="button" value="+/-" onclick="toggleSign()" style="background-color: #bdc1c6; color: black;"></td>
+                <td><input type="button" value="%" onclick="appendOperator('%')" style="background-color: #bdc1c6; color: black;"></td>
+                <td><input type="button" value="÷" onclick="appendOperator('/')" style="background-color: orange; color: white; font-size: 40px;"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="1" onclick="appendNumber(1)"></td>
+                <td><input type="button" value="2" onclick="appendNumber(2)"></td>
+                <td><input type="button" value="3" onclick="appendNumber(3)"></td>
+                <td><input type="button" value="×" onclick="appendOperator('*')" style="background-color: orange; color: white; font-size: 40px;"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="4" onclick="appendNumber(4)"></td>
+                <td><input type="button" value="5" onclick="appendNumber(5)"></td>
+                <td><input type="button" value="6" onclick="appendNumber(6)"></td>
+                <td><input type="button" value="-" onclick="appendOperator('-')" style="background-color: orange; color: white; font-size: 40px;"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="7" onclick="appendNumber(7)"></td>
+                <td><input type="button" value="8" onclick="appendNumber(8)"></td>
+                <td><input type="button" value="9" onclick="appendNumber(9)"></td>
+                <td><input type="button" value="+" onclick="appendOperator('+')" style="background-color: orange; color: white; font-size: 40px;"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="button" value="0" onclick="appendNumber(0)" style="width: 160px;"></td>
+                <td><input type="button" value="." onclick="appendDot()"></td>
+                <td><input type="button" value="=" onclick="calculate()" style="background-color: orange; color: white; font-size: 40px;"></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        let currentInput = '';
+        let currentOperator = '';
+
+        function appendNumber(number) {
+            currentInput += number;
+            document.getElementById('display').value = currentInput;
+        }
+
+        function add() {
+            currentOperator = "+";
+            currentInput += currentOperator;
+            document.getElementById('display').value = currentInput;
+        }
+
+        function minus() {
+            currentOperator = "-";
+            currentInput += currentOperator;
+            document.getElementById('display').value = currentInput;
+        }
+
+        function multi() {
+            currentOperator = "*";
+            currentInput += currentOperator;
+            document.getElementById('display').value = currentInput;
+        }
+
+        function calculate() {
+            
+                const result = eval(currentInput);
+                document.getElementById('display').value = result;
+                currentInput = result.toString();
+                currentOperator = '';
+            
+        }
+
+        function appendOperator(operator) {
+            currentInput += operator;
+            document.getElementById('display').value = currentInput;
+        }
+
+        function appendDot() {
+            if (!currentInput.includes('.')) {
+                currentInput += '.';
+                document.getElementById('display').value = currentInput;
+            }
+        }
+
+        function clearDisplay() {
+            currentInput = '';
+            document.getElementById('display').value = '';
+        }
+
+
+    </script>
+</body>
+</html>
